@@ -1,0 +1,55 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21
+    },
+    "configurePresets": [
+        {
+            "name": "base-mac",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_C_COMPILER": "/usr/bin/clang",
+                "CMAKE_CXX_COMPILER": "/usr/bin/clang++",
+                "CMAKE_OSX_ARCHITECTURES": "arm64",
+                "CMAKE_POLICY_VERSION_MINIMUM": "3.10",
+                "BISON_EXECUTABLE": "/opt/homebrew/opt/bison/bin/bison",
+                "FLEX_EXECUTABLE": "/opt/homebrew/opt/flex/bin/flex",
+                "FLEX_INCLUDE_DIR": "/opt/homebrew/opt/flex/include",
+                "CMAKE_PREFIX_PATH": "/opt/homebrew/opt/readline;/opt/homebrew/opt/flex;/opt/homebrew/opt/bison",
+                "CMAKE_INCLUDE_PATH": "/opt/homebrew/opt/readline/include;/opt/homebrew/opt/flex/include",
+                "CMAKE_LIBRARY_PATH": "/opt/homebrew/opt/readline/lib;/opt/homebrew/opt/flex/lib;/opt/homebrew/opt/bison/lib"
+            }
+        },
+        {
+            "name": "debug",
+            "displayName": "Debug (Ninja + AppleClang, arm64)",
+            "inherits": "base-mac",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release (Ninja + AppleClang, arm64)",
+            "inherits": "base-mac",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        { "name": "debug", "configurePreset": "debug" },
+        { "name": "release", "configurePreset": "release" }
+    ],
+    "testPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "output": { "outputOnFailure": true }
+        }
+    ]
+}

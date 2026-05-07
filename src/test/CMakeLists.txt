@@ -1,3 +1,8 @@
+# brew readline 头不自包含 <stdio.h>，在 mac 上为本目录所有 test 强制预包含 cstdio。
+if(APPLE)
+    add_compile_options(-include cstdio)
+endif()
+
 # storage test
 add_executable(disk_manager_test storage/disk_manager_test.cpp)
 target_link_libraries(disk_manager_test storage gtest_main)
@@ -23,14 +28,14 @@ target_link_libraries(b_plus_tree_concurrent_test system index gtest_main)
 
 # query test
 add_executable(query_test query/query_test.cpp)
+target_link_libraries(query_test ${READLINE_LIBRARY})
 
 # transaction test
 add_executable(transaction_test transaction/transaction_test.cpp)
-target_link_libraries(transaction_test readline)
+target_link_libraries(transaction_test ${READLINE_LIBRARY})
 
 # regress test
 add_executable(regress_test regress/regress_test_main.cpp regress/regress_test.cpp)
 
 # concurrency test
 add_executable(concurrency_test concurrency/concurrency_test_main.cpp concurrency/concurrency_test.cpp regress/regress_test.cpp)
-

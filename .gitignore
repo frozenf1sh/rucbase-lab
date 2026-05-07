@@ -12,6 +12,10 @@
 /cmake-build-wsl_profile_debug
 *.out
 
+# clangd
+/compile_commands.json
+.cache/
+
 # bison & flex
 #lex.yy.cpp
 #yacc.tab.h

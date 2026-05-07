@@ -18,4 +18,8 @@ add_subdirectory(test)
 target_link_libraries(parser execution pthread)
 
 add_executable(rmdb rmdb.cpp)
-target_link_libraries(rmdb parser execution readline pthread planner analyze)
+# brew readline 的头文件不自包含 <stdio.h>（FILE 类型缺失），mac 上需要 force-include。
+if(APPLE)
+    target_compile_options(rmdb PRIVATE -include cstdio)
+endif()
+target_link_libraries(rmdb parser execution ${READLINE_LIBRARY} pthread planner analyze)
