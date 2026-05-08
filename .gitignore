@@ -33,3 +33,5 @@ __pycache__/
 *.zip
 
 deps/
+
+BufferPoolManagerTest_db/

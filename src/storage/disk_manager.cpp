@@ -27,11 +27,19 @@ DiskManager::DiskManager() { memset(fd2pageno_, 0, MAX_FD * (sizeof(std::atomic<
  * @param {int} num_bytes 要写入磁盘的数据大小
  */
 void DiskManager::write_page(int fd, page_id_t page_no, const char *offset, int num_bytes) {
-    // Todo:
-    // 1.lseek()定位到文件头，通过(fd,page_no)可以定位指定页面及其在磁盘文件中的偏移量
-    // 2.调用write()函数
-    // 注意write返回值与num_bytes不等时 throw InternalError("DiskManager::write_page Error");
-
+    // 一个磁盘文件由若干 PAGE_SIZE 大小的"页"线性排布组成；
+    // 第 page_no 页在文件中的字节偏移即 page_no * PAGE_SIZE。
+    // 1) 用 lseek 把文件读写指针定位到目标页的首字节
+    off_t file_offset = static_cast<off_t>(page_no) * PAGE_SIZE;
+    if (lseek(fd, file_offset, SEEK_SET) == -1) {
+        throw InternalError("DiskManager::write_page Error: lseek failed");
+    }
+    // 2) write 真正把数据写入；num_bytes 可能等于 PAGE_SIZE（整页）也可能更小（如只刷页头）
+    ssize_t bytes_written = write(fd, offset, num_bytes);
+    // write 返回值小于 num_bytes 视为出错（磁盘满 / fd 被关 / signal 中断等）
+    if (bytes_written != num_bytes) {
+        throw InternalError("DiskManager::write_page Error");
+    }
 }
 
 /**
@@ -42,11 +50,17 @@ void DiskManager::write_page(int fd, page_id_t page_no, const char *offset, int 
  * @param {int} num_bytes 读取的数据量大小
  */
 void DiskManager::read_page(int fd, page_id_t page_no, char *offset, int num_bytes) {
-    // Todo:
-    // 1.lseek()定位到文件头，通过(fd,page_no)可以定位指定页面及其在磁盘文件中的偏移量
-    // 2.调用read()函数
-    // 注意read返回值与num_bytes不等时，throw InternalError("DiskManager::read_page Error");
-
+    // 与 write_page 对称：先用 lseek 定位到目标页起始位置，再 read。
+    off_t file_offset = static_cast<off_t>(page_no) * PAGE_SIZE;
+    if (lseek(fd, file_offset, SEEK_SET) == -1) {
+        throw InternalError("DiskManager::read_page Error: lseek failed");
+    }
+    ssize_t bytes_read = read(fd, offset, num_bytes);
+    // 这里要求"恰好"读到 num_bytes 字节。读到 EOF（返回 0 或小于 num_bytes）也视作错误，
+    // 上层（BufferPoolManager）必须保证只对已分配过的页面发起 read_page。
+    if (bytes_read != num_bytes) {
+        throw InternalError("DiskManager::read_page Error");
+    }
 }
 
 /**
@@ -99,9 +113,21 @@ bool DiskManager::is_file(const std::string &path) {
  * @param {string} &path
  */
 void DiskManager::create_file(const std::string &path) {
-    // Todo:
-    // 调用open()函数，使用O_CREAT模式
-    // 注意不能重复创建相同文件
+    // 创建一个空文件；要求：若文件已存在则抛 FileExistsError。
+    // 用 O_CREAT | O_EXCL 让 open 在文件已存在时返回 -1（errno=EEXIST），从而避免 race；
+    // 这比"先 stat 后 open"更可靠（后者存在 TOCTOU 时间窗）。
+    if (is_file(path)) {
+        throw FileExistsError(path);
+    }
+    // 0600：文件权限 rw-------（只允许当前用户读写）
+    int fd = open(path.c_str(), O_CREAT | O_EXCL | O_RDWR, 0600);
+    if (fd < 0) {
+        throw UnixError();
+    }
+    // 这里只是创建，不需要持有 fd（上层会再用 open_file 显式打开），所以直接 close。
+    if (close(fd) < 0) {
+        throw UnixError();
+    }
 }
 
 /**
@@ -109,10 +135,21 @@ void DiskManager::create_file(const std::string &path) {
  * @param {string} &path 文件所在路径
  */
 void DiskManager::destroy_file(const std::string &path) {
-    // Todo:
-    // 调用unlink()函数
-    // 注意不能删除未关闭的文件
-    
+    // 删除文件前的两个前置检查：
+    //   (a) 文件必须存在 —— 否则抛 FileNotFoundError；
+    //   (b) 文件必须未处于"已打开"状态 —— DiskManager 通过 path2fd_ 维护打开列表，
+    //       若该路径还在表里说明它的 fd 没被 close_file 释放，禁止销毁，避免悬空 fd。
+    if (!is_file(path)) {
+        throw FileNotFoundError(path);
+    }
+    if (path2fd_.count(path) > 0) {
+        throw FileNotClosedError(path);
+    }
+    // unlink 仅删除目录项，若有进程仍持有该 fd 则文件 inode 会等所有 fd 关闭后再回收；
+    // 但这里我们已确保没有打开 fd，所以 unlink 之后磁盘空间会立即释放。
+    if (unlink(path.c_str()) < 0) {
+        throw UnixError();
+    }
 }
 
 
@@ -122,10 +159,24 @@ void DiskManager::destroy_file(const std::string &path) {
  * @param {string} &path 文件所在路径
  */
 int DiskManager::open_file(const std::string &path) {
-    // Todo:
-    // 调用open()函数，使用O_RDWR模式
-    // 注意不能重复打开相同文件，并且需要更新文件打开列表
-
+    // 1) 文件必须存在
+    if (!is_file(path)) {
+        throw FileNotFoundError(path);
+    }
+    // 2) 不允许重复打开（同一路径只持有一个 fd），保持文件打开列表的一一映射
+    if (path2fd_.count(path) > 0) {
+        throw FileNotClosedError(path);
+    }
+    // 3) 以读写方式打开
+    int fd = open(path.c_str(), O_RDWR);
+    if (fd < 0) {
+        throw UnixError();
+    }
+    // 4) 维护 path<->fd 的双向映射，便于后续通过 fd 反查 path（disk_manager 内部某些
+    //    模块需要用文件名做日志/恢复），也便于 destroy_file 阶段判断"文件是否仍处于打开态"。
+    path2fd_[path] = fd;
+    fd2path_[fd] = path;
+    return fd;
 }
 
 /**
@@ -133,10 +184,17 @@ int DiskManager::open_file(const std::string &path) {
  * @param {int} fd 打开的文件的文件句柄
  */
 void DiskManager::close_file(int fd) {
-    // Todo:
-    // 调用close()函数
-    // 注意不能关闭未打开的文件，并且需要更新文件打开列表
-
+    // 关闭一个未打开的 fd 是错误：若 fd2path_ 里没有记录说明它不是 disk_manager 管理的合法 fd。
+    if (fd2path_.count(fd) == 0) {
+        throw FileNotOpenError(fd);
+    }
+    // 真正关闭内核 fd
+    if (close(fd) < 0) {
+        throw UnixError();
+    }
+    // 同步移除两张表中的记录，使 open_file 能再次成功打开同一路径，destroy_file 也才能放心删。
+    path2fd_.erase(fd2path_[fd]);
+    fd2path_.erase(fd);
 }
 
 
