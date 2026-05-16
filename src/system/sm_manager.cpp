@@ -198,7 +198,26 @@ void SmManager::drop_table(const std::string& tab_name, Context* context) {
  * @param {Context*} context
  */
 void SmManager::create_index(const std::string& tab_name, const std::vector<std::string>& col_names, Context* context) {
+    auto tab_meta = db_.get_table(tab_name);
+    std::vector<ColMeta> curr_cols;
+    auto index_name = ix_manager_->get_index_name(tab_name, col_names);
+    for (auto &n : col_names) {
+        curr_cols.push_back(*tab_meta.get_col(n));
+    }
     
+    IndexMeta meta;
+    meta.tab_name = tab_name;
+    meta.col_num = col_names.size();
+    meta.cols = curr_cols;
+    meta.col_tot_len = 0;
+    for (auto &c : curr_cols) {
+        meta.col_tot_len += c.len;
+    }
+    
+    tab_meta.indexes.push_back(meta);
+    db_.tabs_[tab_name] = tab_meta;
+    
+    ix_manager_->create_index(tab_name, curr_cols);
 }
 
 /**
