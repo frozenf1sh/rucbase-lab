@@ -67,7 +67,7 @@
 
 
 /* First part of user prologue.  */
-#line 1 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 1 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
 
 #include "ast.h"
 #include "yacc.tab.h"
@@ -82,7 +82,7 @@ void yyerror(YYLTYPE *locp, const char* s) {
 
 using namespace ast;
 
-#line 86 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 86 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -1621,489 +1621,489 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* start: stmt ';'  */
-#line 57 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 57 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         parse_tree = (yyvsp[-1].sv_node);
         YYACCEPT;
     }
-#line 1630 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1630 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 3: /* start: HELP  */
-#line 62 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 62 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         parse_tree = std::make_shared<Help>();
         YYACCEPT;
     }
-#line 1639 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1639 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 4: /* start: EXIT  */
-#line 67 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 67 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         parse_tree = nullptr;
         YYACCEPT;
     }
-#line 1648 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1648 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 5: /* start: T_EOF  */
-#line 72 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 72 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         parse_tree = nullptr;
         YYACCEPT;
     }
-#line 1657 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1657 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 10: /* txnStmt: TXN_BEGIN  */
-#line 87 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 87 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<TxnBegin>();
     }
-#line 1665 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1665 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 11: /* txnStmt: TXN_COMMIT  */
-#line 91 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 91 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<TxnCommit>();
     }
-#line 1673 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1673 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 12: /* txnStmt: TXN_ABORT  */
-#line 95 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 95 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<TxnAbort>();
     }
-#line 1681 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1681 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 13: /* txnStmt: TXN_ROLLBACK  */
-#line 99 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 99 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<TxnRollback>();
     }
-#line 1689 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1689 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 14: /* dbStmt: SHOW TABLES  */
-#line 106 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 106 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<ShowTables>();
     }
-#line 1697 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1697 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 15: /* ddl: CREATE TABLE tbName '(' fieldList ')'  */
-#line 113 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 113 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<CreateTable>((yyvsp[-3].sv_str), (yyvsp[-1].sv_fields));
     }
-#line 1705 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1705 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 16: /* ddl: DROP TABLE tbName  */
-#line 117 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 117 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<DropTable>((yyvsp[0].sv_str));
     }
-#line 1713 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1713 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 17: /* ddl: DESC tbName  */
-#line 121 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 121 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<DescTable>((yyvsp[0].sv_str));
     }
-#line 1721 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1721 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 18: /* ddl: CREATE INDEX tbName '(' colNameList ')'  */
-#line 125 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 125 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<CreateIndex>((yyvsp[-3].sv_str), (yyvsp[-1].sv_strs));
     }
-#line 1729 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1729 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 19: /* ddl: DROP INDEX tbName '(' colNameList ')'  */
-#line 129 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 129 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<DropIndex>((yyvsp[-3].sv_str), (yyvsp[-1].sv_strs));
     }
-#line 1737 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1737 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 20: /* dml: INSERT INTO tbName VALUES '(' valueList ')'  */
-#line 136 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 136 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<InsertStmt>((yyvsp[-4].sv_str), (yyvsp[-1].sv_vals));
     }
-#line 1745 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1745 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 21: /* dml: DELETE FROM tbName optWhereClause  */
-#line 140 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 140 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<DeleteStmt>((yyvsp[-1].sv_str), (yyvsp[0].sv_conds));
     }
-#line 1753 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1753 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 22: /* dml: UPDATE tbName SET setClauses optWhereClause  */
-#line 144 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 144 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<UpdateStmt>((yyvsp[-3].sv_str), (yyvsp[-1].sv_set_clauses), (yyvsp[0].sv_conds));
     }
-#line 1761 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1761 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 23: /* dml: SELECT selector FROM tableList optWhereClause opt_order_clause  */
-#line 148 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 148 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_node) = std::make_shared<SelectStmt>((yyvsp[-4].sv_cols), (yyvsp[-2].sv_strs), (yyvsp[-1].sv_conds), (yyvsp[0].sv_orderby));
     }
-#line 1769 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1769 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 24: /* fieldList: field  */
-#line 155 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 155 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_fields) = std::vector<std::shared_ptr<Field>>{(yyvsp[0].sv_field)};
     }
-#line 1777 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1777 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 25: /* fieldList: fieldList ',' field  */
-#line 159 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 159 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_fields).push_back((yyvsp[0].sv_field));
     }
-#line 1785 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1785 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 26: /* colNameList: colName  */
-#line 166 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 166 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_strs) = std::vector<std::string>{(yyvsp[0].sv_str)};
     }
-#line 1793 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1793 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 27: /* colNameList: colNameList ',' colName  */
-#line 170 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 170 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_strs).push_back((yyvsp[0].sv_str));
     }
-#line 1801 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1801 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 28: /* field: colName type  */
-#line 177 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 177 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_field) = std::make_shared<ColDef>((yyvsp[-1].sv_str), (yyvsp[0].sv_type_len));
     }
-#line 1809 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1809 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 29: /* type: INT  */
-#line 184 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 184 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_type_len) = std::make_shared<TypeLen>(SV_TYPE_INT, sizeof(int));
     }
-#line 1817 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1817 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 30: /* type: CHAR '(' VALUE_INT ')'  */
-#line 188 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 188 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_type_len) = std::make_shared<TypeLen>(SV_TYPE_STRING, (yyvsp[-1].sv_int));
     }
-#line 1825 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1825 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 31: /* type: FLOAT  */
-#line 192 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 192 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_type_len) = std::make_shared<TypeLen>(SV_TYPE_FLOAT, sizeof(float));
     }
-#line 1833 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1833 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 32: /* valueList: value  */
-#line 199 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 199 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_vals) = std::vector<std::shared_ptr<Value>>{(yyvsp[0].sv_val)};
     }
-#line 1841 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1841 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 33: /* valueList: valueList ',' value  */
-#line 203 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 203 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_vals).push_back((yyvsp[0].sv_val));
     }
-#line 1849 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1849 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 34: /* value: VALUE_INT  */
-#line 210 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 210 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_val) = std::make_shared<IntLit>((yyvsp[0].sv_int));
     }
-#line 1857 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1857 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 35: /* value: VALUE_FLOAT  */
-#line 214 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 214 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_val) = std::make_shared<FloatLit>((yyvsp[0].sv_float));
     }
-#line 1865 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1865 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 36: /* value: VALUE_STRING  */
-#line 218 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 218 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_val) = std::make_shared<StringLit>((yyvsp[0].sv_str));
     }
-#line 1873 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1873 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 37: /* condition: col op expr  */
-#line 225 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 225 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_cond) = std::make_shared<BinaryExpr>((yyvsp[-2].sv_col), (yyvsp[-1].sv_comp_op), (yyvsp[0].sv_expr));
     }
-#line 1881 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1881 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 38: /* optWhereClause: %empty  */
-#line 231 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 231 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
                       { /* ignore*/ }
-#line 1887 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1887 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 39: /* optWhereClause: WHERE whereClause  */
-#line 233 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 233 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_conds) = (yyvsp[0].sv_conds);
     }
-#line 1895 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1895 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 40: /* whereClause: condition  */
-#line 240 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 240 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_conds) = std::vector<std::shared_ptr<BinaryExpr>>{(yyvsp[0].sv_cond)};
     }
-#line 1903 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1903 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 41: /* whereClause: whereClause AND condition  */
-#line 244 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 244 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_conds).push_back((yyvsp[0].sv_cond));
     }
-#line 1911 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1911 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 42: /* col: tbName '.' colName  */
-#line 251 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 251 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_col) = std::make_shared<Col>((yyvsp[-2].sv_str), (yyvsp[0].sv_str));
     }
-#line 1919 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1919 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 43: /* col: colName  */
-#line 255 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 255 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_col) = std::make_shared<Col>("", (yyvsp[0].sv_str));
     }
-#line 1927 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1927 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 44: /* colList: col  */
-#line 262 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 262 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_cols) = std::vector<std::shared_ptr<Col>>{(yyvsp[0].sv_col)};
     }
-#line 1935 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1935 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 45: /* colList: colList ',' col  */
-#line 266 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 266 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_cols).push_back((yyvsp[0].sv_col));
     }
-#line 1943 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1943 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 46: /* op: '='  */
-#line 273 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 273 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_comp_op) = SV_OP_EQ;
     }
-#line 1951 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1951 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 47: /* op: '<'  */
-#line 277 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 277 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_comp_op) = SV_OP_LT;
     }
-#line 1959 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1959 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 48: /* op: '>'  */
-#line 281 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 281 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_comp_op) = SV_OP_GT;
     }
-#line 1967 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1967 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 49: /* op: NEQ  */
-#line 285 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 285 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_comp_op) = SV_OP_NE;
     }
-#line 1975 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1975 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 50: /* op: LEQ  */
-#line 289 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 289 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_comp_op) = SV_OP_LE;
     }
-#line 1983 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1983 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 51: /* op: GEQ  */
-#line 293 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 293 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_comp_op) = SV_OP_GE;
     }
-#line 1991 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1991 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 52: /* expr: value  */
-#line 300 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 300 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_expr) = std::static_pointer_cast<Expr>((yyvsp[0].sv_val));
     }
-#line 1999 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 1999 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 53: /* expr: col  */
-#line 304 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 304 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_expr) = std::static_pointer_cast<Expr>((yyvsp[0].sv_col));
     }
-#line 2007 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2007 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 54: /* setClauses: setClause  */
-#line 311 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 311 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_set_clauses) = std::vector<std::shared_ptr<SetClause>>{(yyvsp[0].sv_set_clause)};
     }
-#line 2015 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2015 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 55: /* setClauses: setClauses ',' setClause  */
-#line 315 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 315 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_set_clauses).push_back((yyvsp[0].sv_set_clause));
     }
-#line 2023 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2023 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 56: /* setClause: colName '=' value  */
-#line 322 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 322 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_set_clause) = std::make_shared<SetClause>((yyvsp[-2].sv_str), (yyvsp[0].sv_val));
     }
-#line 2031 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2031 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 57: /* selector: '*'  */
-#line 329 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 329 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_cols) = {};
     }
-#line 2039 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2039 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 59: /* tableList: tbName  */
-#line 337 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 337 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_strs) = std::vector<std::string>{(yyvsp[0].sv_str)};
     }
-#line 2047 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2047 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 60: /* tableList: tableList ',' tbName  */
-#line 341 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 341 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_strs).push_back((yyvsp[0].sv_str));
     }
-#line 2055 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2055 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 61: /* tableList: tableList JOIN tbName  */
-#line 345 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 345 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     {
         (yyval.sv_strs).push_back((yyvsp[0].sv_str));
     }
-#line 2063 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2063 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 62: /* opt_order_clause: ORDER BY order_clause  */
-#line 352 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 352 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     { 
         (yyval.sv_orderby) = (yyvsp[0].sv_orderby); 
     }
-#line 2071 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2071 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 63: /* opt_order_clause: %empty  */
-#line 355 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 355 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
                       { /* ignore*/ }
-#line 2077 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2077 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 64: /* order_clause: col opt_asc_desc  */
-#line 360 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 360 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
     { 
         (yyval.sv_orderby) = std::make_shared<OrderBy>((yyvsp[-1].sv_col), (yyvsp[0].sv_orderby_dir));
     }
-#line 2085 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2085 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 65: /* opt_asc_desc: ASC  */
-#line 366 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 366 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
                  { (yyval.sv_orderby_dir) = OrderBy_ASC;     }
-#line 2091 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2091 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 66: /* opt_asc_desc: DESC  */
-#line 367 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 367 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
                  { (yyval.sv_orderby_dir) = OrderBy_DESC;    }
-#line 2097 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2097 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
   case 67: /* opt_asc_desc: %empty  */
-#line 368 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 368 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
             { (yyval.sv_orderby_dir) = OrderBy_DEFAULT; }
-#line 2103 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2103 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
     break;
 
 
-#line 2107 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.tab.cpp"
+#line 2107 "/home/fish/prj/rucbase-lab2/src/parser/yacc.tab.cpp"
 
       default: break;
     }
@@ -2332,5 +2332,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 374 "/Users/frozenf1sh/prj/rucbase-lab/src/parser/yacc.y"
+#line 374 "/home/fish/prj/rucbase-lab2/src/parser/yacc.y"
 

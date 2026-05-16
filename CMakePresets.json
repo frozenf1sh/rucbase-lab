@@ -6,6 +6,18 @@
     },
     "configurePresets": [
         {
+            "name": "base-linux",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_C_COMPILER": "/usr/bin/gcc",
+                "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+                "CMAKE_POLICY_VERSION_MINIMUM": "3.10"
+            }
+        },
+        {
             "name": "base-mac",
             "hidden": true,
             "generator": "Ninja",
@@ -26,6 +38,22 @@
         },
         {
             "name": "debug",
+            "displayName": "Debug (Ninja + GCC, Linux x86_64)",
+            "inherits": "base-linux",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release (Ninja + GCC, Linux x86_64)",
+            "inherits": "base-linux",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "debug-mac",
             "displayName": "Debug (Ninja + AppleClang, arm64)",
             "inherits": "base-mac",
             "cacheVariables": {
@@ -33,7 +61,7 @@
             }
         },
         {
-            "name": "release",
+            "name": "release-mac",
             "displayName": "Release (Ninja + AppleClang, arm64)",
             "inherits": "base-mac",
             "cacheVariables": {
@@ -43,12 +71,19 @@
     ],
     "buildPresets": [
         { "name": "debug", "configurePreset": "debug" },
-        { "name": "release", "configurePreset": "release" }
+        { "name": "release", "configurePreset": "release" },
+        { "name": "debug-mac", "configurePreset": "debug-mac" },
+        { "name": "release-mac", "configurePreset": "release-mac" }
     ],
     "testPresets": [
         {
             "name": "debug",
             "configurePreset": "debug",
+            "output": { "outputOnFailure": true }
+        },
+        {
+            "name": "debug-mac",
+            "configurePreset": "debug-mac",
             "output": { "outputOnFailure": true }
         }
     ]
